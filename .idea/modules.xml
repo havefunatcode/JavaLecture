@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FastCampusLecture/FastCampusLecture.iml" filepath="$PROJECT_DIR$/FastCampusLecture/FastCampusLecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/JavaLecture.iml" filepath="$PROJECT_DIR$/.idea/JavaLecture.iml" />
+    </modules>
+  </component>
+</project>
