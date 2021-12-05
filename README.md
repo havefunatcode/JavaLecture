@@ -10,3 +10,7 @@ FastCampus Java Lecture
 
 ### 21.11.25 추가
 - LocalDate Example & Object Extends Example 추가
+
+### 21.12.05 추가
+- JPA Example
+  + User, Item, Order_Detail 예제 추가
