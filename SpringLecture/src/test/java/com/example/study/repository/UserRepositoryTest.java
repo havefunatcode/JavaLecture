@@ -38,7 +38,8 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Transactional
     public void read() {
         // User user = userRepository.findById(2L); // return type Optional기 때문에 에러가 발생한다.
-        Optional<User> user = userRepository.findById(1L);
+        //Optional<User> user = userRepository.findById(1L);
+        Optional<User> user = userRepository.findByAccount("TestUser01");
 
         user.ifPresent(selectUser ->{
             selectUser.getOrderDetailList().stream().forEach(detail -> {
