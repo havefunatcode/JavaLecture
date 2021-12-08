@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class ItemRepositoryTest extends AdminProjectApplicationTests {
     @Autowired
@@ -25,7 +26,7 @@ public class ItemRepositoryTest extends AdminProjectApplicationTests {
         item.setRegisteredAt(LocalDateTime.now());
         item.setCreatedAt(LocalDateTime.now());
         item.setCreatedBy("Partner01");
-        item.setPartnerId(1L);
+        // item.setPartnerId(1L);
 
         Item newItem = itemRepository.save(item);
 
@@ -34,6 +35,8 @@ public class ItemRepositoryTest extends AdminProjectApplicationTests {
 
     @Test
     public void read() {
-
+        Long id = 1L;
+        Optional<Item> item = itemRepository.findById(id);
+        Assertions.assertTrue(item.isPresent());
     }
 }
