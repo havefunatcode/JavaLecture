@@ -10,3 +10,12 @@ FastCampus Java Lecture
 
 ### 21.11.25 추가
 - LocalDate Example & Object Extends Example 추가
+
+### 21.12.05 추가
+- JPA Example
+  + User, Item, Order_Detail 예제 추가
+
+### 21.12.07 추가
+- JPA Admin Project 시작
+  + AdminUser, Category, Item, OrderDetail, OrderGroup, Partner, User 예제 추가
+  + MySQL > Study Schema > admin_user, category, item, order_detail, order_group, partner, user Table 추가
