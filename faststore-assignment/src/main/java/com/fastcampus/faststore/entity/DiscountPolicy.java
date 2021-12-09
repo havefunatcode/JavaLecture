@@ -36,7 +36,7 @@ public class DiscountPolicy extends BaseEntity {
             result = price - amount;
         }
 
-        System.out.println(result);
+        // System.out.println(result);
 
         return result;
     }

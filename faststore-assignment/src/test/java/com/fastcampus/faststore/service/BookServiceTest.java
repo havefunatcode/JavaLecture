@@ -3,6 +3,7 @@ package com.fastcampus.faststore.service;
 import com.fastcampus.faststore.entity.Book;
 import com.fastcampus.faststore.repository.BookRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,15 @@ public class BookServiceTest {
     // TODO: getOrThrow 테스트 코드를 작성하세요.
     @Test
     public void getOrThrow() {
+        Book book = new Book("자바의 정석", "남궁성", 30000L);
+        bookRepository.save(book);
+
+        Book newBook = bookService.getOrThrow(book.getTitle());
+        Assertions.assertNotNull(newBook);
+
+        assertThat(newBook.getTitle()).isEqualTo(book.getTitle());
+        assertThat(newBook.getAuthor()).isEqualTo(book.getAuthor());
+        assertThat(newBook.getPrice()).isEqualTo(book.getPrice());
     }
 
     @Test

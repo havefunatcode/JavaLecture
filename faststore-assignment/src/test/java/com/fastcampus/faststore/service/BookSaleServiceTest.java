@@ -1,6 +1,7 @@
 package com.fastcampus.faststore.service;
 
 import com.fastcampus.faststore.entity.Book;
+import com.fastcampus.faststore.entity.BookInventory;
 import com.fastcampus.faststore.entity.BookSale;
 import com.fastcampus.faststore.entity.DiscountPolicy;
 import com.fastcampus.faststore.repository.BookRepository;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
 public class BookSaleServiceTest {
@@ -66,6 +68,21 @@ public class BookSaleServiceTest {
     @Test
     @Transactional
     public void registerBookSale() {
+        Book book = new Book("자바의 정석", "남궁성", 30000L);
+        DiscountPolicy discountPolicy = new DiscountPolicy(DiscountType.PERCENT, 10L);
+
+        bookRepository.save(book);
+        discountPolicyRepository.save(discountPolicy);
+        bookSaleRepository.save(new BookSale(book, discountPolicy));
+
+        BookSale result = bookSaleService.getOrThrow(book);
+
+        bookSaleService.registerBookSale(book.getTitle(), discountPolicy.getDiscountType(), discountPolicy.getAmount());
+        assertThat(result.getBook().getTitle()).isEqualTo(book.getTitle());
+        assertThat(result.getBook().getAuthor()).isEqualTo(book.getAuthor());
+        assertThat(result.getBook().getPrice()).isEqualTo(book.getPrice());
+        assertThat(result.getDiscountPolicy().getDiscountType()).isEqualTo(discountPolicy.getDiscountType());
+        assertThat(result.getDiscountPolicy().getAmount()).isEqualTo(discountPolicy.getAmount());
     }
 
 }

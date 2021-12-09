@@ -17,9 +17,12 @@ public class BookInventoryService {
 
     @Transactional
     public void storeBook(String title) {
-        Book book = bookService.getOrThrow(title);
+        Book book = bookService.getOrThrow(title);  // null
+
         BookSale bookSale = bookSaleService.getOrThrow(book);
+
         BookInventory inventory = getOrNew(book);
+
         inventory.addBook(bookSale);
         bookInventoryRepository.save(inventory);
     }

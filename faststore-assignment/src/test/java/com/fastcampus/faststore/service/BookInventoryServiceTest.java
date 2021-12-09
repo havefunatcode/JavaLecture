@@ -50,7 +50,27 @@ public class BookInventoryServiceTest {
     @Test
     @Transactional
     public void storeBook() {
+        Book book = new Book("자바의 정석", "남궁성", 30000L);
+        bookRepository.save(book);
 
+        bookInventoryRepository.save(new BookInventory(book, 1L, 27000L));
+
+        DiscountPolicy discountPolicy = new DiscountPolicy(DiscountType.PERCENT, 10L);
+        BookSale bookSale = new BookSale(book, discountPolicy);
+        given(bookService.getOrThrow("자바의 정석")).willReturn(book);
+        given(bookSaleService.getOrThrow(book)).willReturn(bookSale);
+
+        bookInventoryService.storeBook(book.getTitle());
+
+        assertThat(bookInventoryRepository.count()).isEqualTo(1L);
+
+        BookInventory result = bookInventoryRepository.findAll().get(0);
+
+        assertThat(result.getBook().getTitle()).isEqualTo(book.getTitle());
+        assertThat(result.getBook().getAuthor()).isEqualTo(book.getAuthor());
+        assertThat(result.getBook().getPrice()).isEqualTo(book.getPrice());
+        assertThat(result.getCount()).isEqualTo(2L);
+        assertThat(result.getIncome()).isEqualTo(54000L);
     }
 
     @Test
